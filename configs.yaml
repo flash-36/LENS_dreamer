@@ -176,6 +176,29 @@ memorymaze:
   imag_gradient: 'reinforce'
   task: 'memorymaze_9x9'
 
+aloha:
+  task: 'aloha_AlohaInsertion-v0'
+  steps: 5e6
+  action_repeat: 1
+  envs: 4
+  parallel: False
+  train_ratio: 512
+  video_pred_log: true
+  time_limit: 400
+  prefill: 2500
+  eval_episode_num: 10
+  size: [128, 128]
+  dyn_hidden: 1024
+  dyn_deter: 1024
+  units: 1024
+  expl_until: 100000
+  expl_behavior: 'greedy'
+  expl_intr_scale: 1.0
+  imag_horizon: 30
+  encoder: {mlp_keys: '$^', cnn_keys: 'image', cnn_depth: 64, mlp_layers: 5, mlp_units: 1024}
+  decoder: {mlp_keys: '$^', cnn_keys: 'image', cnn_depth: 64, mlp_layers: 5, mlp_units: 1024}
+  actor: {layers: 2, dist: 'normal', entropy: 3e-4, unimix_ratio: 0.01, std: 'learned', min_std: 0.05, max_std: 0.5, temp: 0.1, lr: 3e-5, eps: 1e-5, grad_clip: 100.0, outscale: 1.0}
+
 debug:
   debug: True
   pretrain: 1
